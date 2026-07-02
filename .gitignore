@@ -1,0 +1,13 @@
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# PDF 文件（不提交，各人自己导出）
+*.pdf
+
+# Python 虚拟环境
+venv/
+.venv/
+
+# 笔记草稿
+*.draft.md
