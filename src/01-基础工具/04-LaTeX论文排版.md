@@ -1,4 +1,4 @@
-# 第 4 章 · LaTeX 论文排版 🟣 ⭐
+# 第 4 章 · LaTeX 论文排版 
 
 > 数模论文的排版标准答案就是 LaTeX。Word 也能写，但公式一多、引用一多，LaTeX 甩 Word 几条街。
 
@@ -47,9 +47,9 @@
 
 ```latex
 \documentclass[12pt,a4paper]{article}
-\usepackage[UTF8]{ctex}        % 中文支持
-\usepackage{amsmath,amssymb}   % 数学符号
-\usepackage{graphicx}          % 插图
+\usepackage[UTF8]{ctex} % 中文支持
+\usepackage{amsmath,amssymb} % 数学符号
+\usepackage{graphicx} % 插图
 \usepackage{geometry}
 \geometry{margin=2.5cm}
 
@@ -77,14 +77,14 @@
 
 目标函数：
 \begin{equation}
-    \min Z = \sum_{i=1}^{n} c_i x_i
-    \label{eq:obj}
+ \min Z = \sum_{i=1}^{n} c_i x_i
+ \label{eq:obj}
 \end{equation}
 
 约束条件：
 \begin{equation}
-    \sum_{i=1}^{n} a_{ji} x_i \leq b_j, \quad j = 1,2,\ldots,m
-    \label{eq:constraint}
+ \sum_{i=1}^{n} a_{ji} x_i \leq b_j, \quad j = 1,2,\ldots,m
+ \label{eq:constraint}
 \end{equation}
 
 如公式 \eqref{eq:obj} 和公式 \eqref{eq:constraint} 所示...
@@ -111,43 +111,43 @@ $f(x) = \sum_{i=1}^{n} x_i^2$
 
 % 独立公式（无编号）
 \[
-    \frac{\partial u}{\partial t} = \alpha \nabla^2 u
+ \frac{\partial u}{\partial t} = \alpha \nabla^2 u
 \]
 
 % 独立公式（有编号，可引用）
 \begin{equation}
-    P(A|B) = \frac{P(B|A)P(A)}{P(B)}
-    \label{eq:bayes}
+ P(A|B) = \frac{P(B|A)P(A)}{P(B)}
+ \label{eq:bayes}
 \end{equation}
 
 % 多行对齐
 \begin{align}
-    y &= x_1 + 2x_2 + 3x_3 \\
-      &\leq 100 \nonumber
+ y &= x_1 + 2x_2 + 3x_3 \\
+ &\leq 100 \nonumber
 \end{align}
 
 % 矩阵
 \begin{bmatrix}
-    a_{11} & a_{12} \\
-    a_{21} & a_{22}
+ a_{11} & a_{12} \\
+ a_{21} & a_{22}
 \end{bmatrix}
 
 % 分段函数
 f(x) = \begin{cases}
-    0, & x < 0 \\
-    x^2, & 0 \leq x \leq 1 \\
-    1, & x > 1
+ 0, & x < 0 \\
+ x^2, & 0 \leq x \leq 1 \\
+ 1, & x > 1
 \end{cases}
 ```
 
 ### 图片
 
 ```latex
-\begin{figure}[htbp]          % h=here, t=top, b=bottom, p=page
-    \centering
-    \includegraphics[width=0.8\textwidth]{figure1.png}
-    \caption{模型流程图}
-    \label{fig:flow}
+\begin{figure}[htbp] % h=here, t=top, b=bottom, p=page
+ \centering
+ \includegraphics[width=0.8\textwidth]{figure1.png}
+ \caption{模型流程图}
+ \label{fig:flow}
 \end{figure}
 ```
 
@@ -155,17 +155,17 @@ f(x) = \begin{cases}
 
 ```latex
 \begin{table}[htbp]
-    \centering
-    \caption{不同模型结果对比}
-    \label{tab:comparison}
-    \begin{tabular}{|c|c|c|c|}
-        \hline
-        模型 & 准确率 & 运行时间(s) & 内存(MB) \\
-        \hline
-        线性规划 & 92.3\% & 0.5 & 128 \\
-        随机森林 & 95.1\% & 12.3 & 1024 \\
-        \hline
-    \end{tabular}
+ \centering
+ \caption{不同模型结果对比}
+ \label{tab:comparison}
+ \begin{tabular}{|c|c|c|c|}
+ \hline
+ 模型 & 准确率 & 运行时间(s) & 内存(MB) \\
+ \hline
+ 线性规划 & 92.3\% & 0.5 & 128 \\
+ 随机森林 & 95.1\% & 12.3 & 1024 \\
+ \hline
+ \end{tabular}
 \end{table}
 ```
 
@@ -173,13 +173,13 @@ f(x) = \begin{cases}
 
 ```latex
 \begin{itemize}
-    \item 第一条
-    \item 第二条
+ \item 第一条
+ \item 第二条
 \end{itemize}
 
 \begin{enumerate}
-    \item 第一步
-    \item 第二步
+ \item 第一步
+ \item 第二步
 \end{enumerate}
 ```
 
@@ -198,11 +198,11 @@ f(x) = \begin{cases}
 
 ## 4.6 常见坑
 
-- ⚠️ 中文论文一定要加 `\usepackage[UTF8]{ctex}`，不然中文不显示
-- ⚠️ 图片路径用相对路径，图片和 `.tex` 放同一文件夹
-- ⚠️ Overleaf 免费版编译时间有限（约 1 分钟），大论文可能超时 → 本地编译
-- ⚠️ 提交前一定检查所有 `\ref{}` 是否正确引用，Overleaf 爆红的地方就是有问题的
-- ⚠️ 不要手动编号（图 1、表 2、公式 3）——让 LaTeX 自动编号，改顺序也不用改数字
+- 中文论文一定要加 `\usepackage[UTF8]{ctex}`，不然中文不显示
+- 图片路径用相对路径，图片和 `.tex` 放同一文件夹
+- Overleaf 免费版编译时间有限（约 1 分钟），大论文可能超时 → 本地编译
+- 提交前一定检查所有 `\ref{}` 是否正确引用，Overleaf 爆红的地方就是有问题的
+- 不要手动编号（图 1、表 2、公式 3）——让 LaTeX 自动编号，改顺序也不用改数字
 
 ---
 

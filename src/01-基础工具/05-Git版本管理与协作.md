@@ -18,7 +18,7 @@
 
 ```
 你的电脑 ←→ GitHub ←→ 队友的电脑
-  (Git)              (Git)
+ (Git) (Git)
 ```
 
 你改完 → `push` 推到 GitHub → 队友 `pull` 拉到自己电脑。
@@ -69,11 +69,11 @@ git push origin main
 ### 场景三：一条龙命令（最常用）
 
 ```bash
-git pull origin main           # 拉最新
+git pull origin main # 拉最新
 # ... 写笔记 ...
-git add .                      # 把所有修改加入暂存区
-git commit -m "写完了 7.2"      # 提交
-git push origin main           # 推送
+git add . # 把所有修改加入暂存区
+git commit -m "写完了 7.2" # 提交
+git push origin main # 推送
 ```
 
 ---
@@ -151,7 +151,7 @@ git push origin main
 | `git clone <仓库地址>` | 克隆仓库到本地 |
 | `git checkout -b <分支名>` | 创建并切换到新分支 |
 | `git merge <分支名>` | 合并指定分支到当前分支 |
-| `git reset --hard HEAD~1` | 撤销最近一次 commit（⚠️ 不可逆） |
+| `git reset --hard HEAD~1` | 撤销最近一次 commit（ 不可逆） |
 
 ---
 
@@ -162,9 +162,9 @@ git push origin main
 1. 打开 [github.com](https://github.com)，登录
 2. 右上角 `+` → `New repository`
 3. 填写：
-   - Repository name：`math-modeling-notes`（或你们喜欢的名字）
-   - Description：数模竞赛团队学习笔记
-   - Public / Private：建议 **Private**（比赛期间别公开）
+ - Repository name：`math-modeling-notes`（或你们喜欢的名字）
+ - Description：数模竞赛团队学习笔记
+ - Public / Private：建议 **Private**（比赛期间别公开）
 4. 不要勾选 "Add a README file"（本地已经有了）
 5. 点 `Create repository`
 

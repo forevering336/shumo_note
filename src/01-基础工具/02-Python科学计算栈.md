@@ -1,4 +1,4 @@
-# 第 2 章 · Python 科学计算栈 🟦🟢 ⭐
+# 第 2 章 · Python 科学计算栈 
 
 > 数模编程的主力语言。MATLAB 也能做，但 Python 免费、库全、队友都能装。
 
@@ -9,8 +9,8 @@
 ### 确认安装
 
 ```bash
-python --version   # 应显示 3.9 或更高
-pip --version      # 确认 pip 可用
+python --version # 应显示 3.9 或更高
+pip --version # 确认 pip 可用
 ```
 
 ### 必装的库
@@ -36,29 +36,29 @@ import numpy as np
 
 # 创建数组
 a = np.array([1, 2, 3, 4, 5])
-b = np.zeros((3, 4))         # 3×4 全零矩阵
-c = np.ones((2, 3))           # 2×3 全一矩阵
-d = np.linspace(0, 10, 100)   # 0到10之间100个等分点
-e = np.arange(0, 10, 0.1)     # 0到10，步长0.1
+b = np.zeros((3, 4)) # 3×4 全零矩阵
+c = np.ones((2, 3)) # 2×3 全一矩阵
+d = np.linspace(0, 10, 100) # 0到10之间100个等分点
+e = np.arange(0, 10, 0.1) # 0到10，步长0.1
 
 # 矩阵运算
 A = np.array([[1, 2], [3, 4]])
 B = np.array([[5, 6], [7, 8]])
-A @ B          # 矩阵乘法
-A * B          # 逐元素乘法
-np.linalg.inv(A)   # 矩阵求逆
-np.linalg.eig(A)   # 特征值/特征向量
-np.linalg.solve(A, b)  # 解 Ax = b
+A @ B # 矩阵乘法
+A * B # 逐元素乘法
+np.linalg.inv(A) # 矩阵求逆
+np.linalg.eig(A) # 特征值/特征向量
+np.linalg.solve(A, b) # 解 Ax = b
 
 # 常用函数
-np.sin(a)      # 三角函数（自动逐元素）
-np.exp(a)      # e^x
-np.log(a)      # 自然对数
-np.sum(a)      # 求和
-np.mean(a)     # 均值
-np.std(a)      # 标准差
-np.max(a)      # 最大值
-np.argmax(a)   # 最大值的位置
+np.sin(a) # 三角函数（自动逐元素）
+np.exp(a) # e^x
+np.log(a) # 自然对数
+np.sum(a) # 求和
+np.mean(a) # 均值
+np.std(a) # 标准差
+np.max(a) # 最大值
+np.argmax(a) # 最大值的位置
 ```
 
 ### 数模高频操作
@@ -71,10 +71,10 @@ X, Y = np.meshgrid(x, y)
 Z = np.sin(np.sqrt(X**2 + Y**2))
 
 # 随机数（模拟/蒙特卡洛）
-np.random.seed(42)             # 固定种子，结果可复现
-np.random.rand(10)             # [0,1) 均匀分布 10 个
-np.random.randn(10)            # 标准正态分布 10 个
-np.random.randint(0, 100, 10)  # 0-99 随机整数 10 个
+np.random.seed(42) # 固定种子，结果可复现
+np.random.rand(10) # [0,1) 均匀分布 10 个
+np.random.randn(10) # 标准正态分布 10 个
+np.random.randint(0, 100, 10) # 0-99 随机整数 10 个
 ```
 
 ---
@@ -101,15 +101,15 @@ result, error = quad(lambda x: np.exp(-x**2), -np.inf, np.inf)
 
 # 3. 插值 — 给离散数据补连续曲线
 from scipy.interpolate import interp1d, CubicSpline
-f = interp1d(x_data, y_data, kind='cubic')  # 三次样条插值
+f = interp1d(x_data, y_data, kind='cubic') # 三次样条插值
 
 # 4. 线性代数 — 比 NumPy 更全
 from scipy.linalg import lu, qr, svd, null_space
 
 # 5. 统计分布
 from scipy.stats import norm, t, chi2, f
-norm.ppf(0.975)       # 正态分布 97.5% 分位数 ≈ 1.96
-t.ppf(0.975, df=10)   # t 分布
+norm.ppf(0.975) # 正态分布 97.5% 分位数 ≈ 1.96
+t.ppf(0.975, df=10) # t 分布
 ```
 
 ---
@@ -126,23 +126,23 @@ t.ppf(0.975, df=10)   # t 分布
 import pandas as pd
 
 # 读数据
-df = pd.read_csv('data.csv')           # CSV
-df = pd.read_excel('data.xlsx')        # Excel
+df = pd.read_csv('data.csv') # CSV
+df = pd.read_excel('data.xlsx') # Excel
 
 # 看一眼数据
-df.head()          # 前 5 行
-df.info()          # 每列的数据类型和缺失情况
-df.describe()      # 数值列的统计摘要（均值、标准差等）
+df.head() # 前 5 行
+df.info() # 每列的数据类型和缺失情况
+df.describe() # 数值列的统计摘要（均值、标准差等）
 
 # 选择/过滤
-df['列名']                          # 取一列
-df[['列1', '列2']]                  # 取多列
-df[df['列名'] > 10]                 # 按条件筛选行
-df.loc[5:10, ['列1', '列2']]        # 按位置选
+df['列名'] # 取一列
+df[['列1', '列2']] # 取多列
+df[df['列名'] > 10] # 按条件筛选行
+df.loc[5:10, ['列1', '列2']] # 按位置选
 
 # 缺失值处理
-df.dropna()         # 删掉有缺失的行
-df.fillna(0)        # 缺失值填 0
+df.dropna() # 删掉有缺失的行
+df.fillna(0) # 缺失值填 0
 df.fillna(df.mean()) # 缺失值填均值
 
 # 分组聚合（类似 Excel 透视表）
