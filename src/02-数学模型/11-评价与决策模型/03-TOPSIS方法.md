@@ -101,7 +101,49 @@ TOPSIS广泛用于：
 - 环境质量评价
 - 绩效管理与资源配置
 
-## 7 小结
+## 7 公式与实现
 
-TOPSIS是一种思想明确、计算方便的多准则排序方法，适用于定量评价指标较为明确的场景。其关键在于正确标准化指标、合理设置权重，并区分成本型与收益型指标。
+设加权规范化矩阵为 $V=(v_{ij})$，正、负理想解分别为 $v_j^+$ 和 $v_j^-$。方案 $i$ 到两个理想解的距离为：
+
+$$
+D_i^+
+=
+\sqrt{\sum_j(v_{ij}-v_j^+)^2},
+\qquad
+D_i^-
+=
+\sqrt{\sum_j(v_{ij}-v_j^-)^2}
+$$
+
+相对贴近度为：
+
+$$
+C_i=\frac{D_i^-}{D_i^++D_i^-}
+$$
+
+$C_i$ 越大，方案越接近正理想解。
+
+```python
+import numpy as np
+
+def topsis(X, weight):
+    X = np.asarray(X, dtype=float)
+    weight = np.asarray(weight, dtype=float)
+    norm = np.linalg.norm(X, axis=0)
+    if np.any(norm == 0):
+        raise ValueError("存在全零指标")
+
+    V = X / norm * (weight / weight.sum())
+    ideal_best = V.max(axis=0)
+    ideal_worst = V.min(axis=0)
+    d_best = np.linalg.norm(V - ideal_best, axis=1)
+    d_worst = np.linalg.norm(V - ideal_worst, axis=1)
+    return d_worst / (d_best + d_worst)
+```
+
+这段代码假设所有指标已经转成“越大越好”。成本型和区间型指标应在调用前处理。
+
+## 8 小结
+
+TOPSIS给出的是相对于当前候选方案集合的排序。加入或删除一个方案后，理想解可能变化，因此应检查排名是否稳定。
 

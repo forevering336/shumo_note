@@ -5,6 +5,9 @@ Thumbs.db
 # PDF 文件（不提交，各人自己导出）
 *.pdf
 
+# 本地构建临时文件
+tmp/
+
 # Python 虚拟环境
 venv/
 .venv/

@@ -114,8 +114,8 @@ A = [a_ij]，其中a_ij表示因素i相对于因素j的重要性，满足a_ij = 
 
 - g1 = (1 × 1/3 × 3)^{1/3} = 1
 - g2 = (3 × 1 × 5)^{1/3} ≈ 2.466
-- g3 = (1/3 × 1/5 × 1)^{1/3} ≈ 0.55
-- 归一化： w = [0.25, 0.62, 0.14]
+- g3 = (1/3 × 1/5 × 1)^{1/3} ≈ 0.405
+- 归一化： w ≈ [0.258, 0.637, 0.105]
 
 然后分别构造方案层在每个准则下的判断矩阵，计算方案在各准则下的权重，最后合成全局权重得到方案排序。
 
@@ -143,7 +143,36 @@ AHP广泛应用于：
 - 绩效评价与资源配置
 - 教育、医疗、环境等公共政策评价
 
-## 7 小结
+## 7 Python实现
 
-层次分析法通过层次结构、成对比较和一致性检验，为多准则评价问题提供了系统化的求解框架。掌握AHP的构建步骤和一致性检验方法，可以提高多指标评价的科学性和可解释性。
+```python
+import numpy as np
+
+RI = {1: 0.00, 2: 0.00, 3: 0.58, 4: 0.90, 5: 1.12,
+      6: 1.24, 7: 1.32, 8: 1.41, 9: 1.45, 10: 1.49}
+
+def ahp_weight(A):
+    A = np.asarray(A, dtype=float)
+    n = A.shape[0]
+    if A.shape != (n, n) or np.any(A <= 0):
+        raise ValueError("判断矩阵必须为正方形且元素为正")
+    if not np.allclose(A * A.T, 1.0, atol=1e-8):
+        raise ValueError("判断矩阵不满足互反性")
+
+    eigvals, eigvecs = np.linalg.eig(A)
+    idx = np.argmax(eigvals.real)
+    lambda_max = eigvals[idx].real
+    w = np.abs(eigvecs[:, idx].real)
+    w = w / w.sum()
+
+    ci = 0.0 if n <= 2 else (lambda_max - n) / (n - 1)
+    cr = 0.0 if n <= 2 else ci / RI[n]
+    return w, lambda_max, cr
+```
+
+一致性通过只说明判断没有明显自相矛盾，不代表权重客观正确。专家来源、标度依据和权重敏感性仍需单独讨论。
+
+## 8 小结
+
+AHP适合层次清楚、定量数据不足而专家判断有依据的问题。指标过多时两两比较负担很大，可以先合并高度重复的指标，再构造判断矩阵。
 

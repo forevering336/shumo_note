@@ -94,7 +94,45 @@ DEA广泛应用于：
 - 能源和环境投入产出分析
 - 物流运作效率和供应链绩效分析
 
-## 8 小结
+## 8 输入导向CCR模型
 
-数据包络分析通过构造线性规划模型，为多投入多产出系统的效率评价提供了一种实用的非参数方法。掌握CCR与BCC模型和规模效率分析，有助于深入理解评价对象的相对效率和改进方向。
+对待评价单元 $o$，输入导向包络模型为：
+
+$$
+\begin{aligned}
+\min_{\theta,\lambda}\quad & \theta\\
+\text{s.t.}\quad
+&X\lambda\leq \theta x_o\\
+&Y\lambda\geq y_o\\
+&\lambda\geq 0
+\end{aligned}
+$$
+
+$\theta=1$ 且松弛量为 0 时，该决策单元位于效率前沿。BCC模型再增加 $\mathbf{1}^T\lambda=1$，用于允许可变规模报酬。
+
+```python
+import cvxpy as cp
+import numpy as np
+
+def dea_ccr_input(X, Y, index):
+    X = np.asarray(X, dtype=float)  # 行：投入指标，列：DMU
+    Y = np.asarray(Y, dtype=float)  # 行：产出指标，列：DMU
+    n = X.shape[1]
+
+    lam = cp.Variable(n, nonneg=True)
+    theta = cp.Variable(nonneg=True)
+    constraints = [
+        X @ lam <= theta * X[:, index],
+        Y @ lam >= Y[:, index],
+    ]
+    problem = cp.Problem(cp.Minimize(theta), constraints)
+    problem.solve()
+    return theta.value, lam.value
+```
+
+DEA评价的是样本内部的相对效率。异常值、指标过多或决策单元太少，都会让大量对象看起来“有效”。投入和产出方向必须有明确业务意义。
+
+## 9 小结
+
+DEA不仅给出效率值，还能通过参考集和松弛量提示改进方向。报告结果时应说明导向、规模报酬假设、指标选择和样本量。
 
